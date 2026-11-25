@@ -21,7 +21,7 @@ CSRF_TRUSTED_ORIGINS = [
     for x in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
     if x.strip()
 ]
-SITE_NAME = os.environ.get("SITE_NAME", "Mi organización")
+SITE_NAME = os.environ.get("SITE_NAME", "Sabor Andino")
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -30,7 +30,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "cuentas",
-    "catalogo",
+    "productores",
+    "precios",
+    "acopio",
     "inicio",
     "axes",
 ]
@@ -57,6 +59,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "inicio.context_processors.organizacion",
+                "inicio.context_processors.permisos_usuario",
             ]
         },
     }

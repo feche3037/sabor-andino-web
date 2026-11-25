@@ -5,9 +5,9 @@ from .models import Usuario
 
 @admin.register(Usuario)
 class UsuarioAdmin(UserAdmin):
-    list_display = ("username", "email", "estado", "is_active", "is_superuser")
+    list_display = ("username", "email", "rol", "estado", "is_active", "is_superuser")
     readonly_fields = ("estado",)
-    fieldsets = UserAdmin.fieldsets + (("Aprobación", {"fields": ("estado",)}),)
+    fieldsets = UserAdmin.fieldsets + (("Sabor Andino", {"fields": ("estado", "rol", "puesto")}),)
 
     def has_module_permission(self, request):
         return request.user.is_superuser

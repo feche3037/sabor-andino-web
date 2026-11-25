@@ -52,11 +52,13 @@ class CuentasTests(TestCase):
 
     def test_admin_aprueba_y_queda_evidencia(self):
         self.client.force_login(self.admin)
+        # Sabor Andino: al aprobar, Administración asigna un rol (HU02)
         self.client.post(
-            reverse("cuentas:resolver", args=[self.usuario.pk]), {"accion": "aprobar"}
+            reverse("cuentas:resolver", args=[self.usuario.pk]), {"accion": "aprobar", "rol": "compras"}
         )
         self.usuario.refresh_from_db()
         self.assertTrue(self.usuario.is_active)
+        self.assertEqual(self.usuario.rol, "compras")
         self.assertEqual(self.usuario.estado, "aprobado")
         self.assertEqual(LogEntry.objects.filter(user=self.admin).count(), 1)
         self.client.logout()
